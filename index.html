@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>John Paul N. Jeruta — Portfolio</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+    background: #f8f9fa;
+    color: #1a1a2e;
+    line-height: 1.6;
+  }
+  a { color: #2563eb; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+
+  /* Header / Hero */
+  .hero {
+    background: linear-gradient(135deg, #1a2332 0%, #2d3a4a 100%);
+    color: #fff;
+    padding: 60px 0 50px;
+    text-align: center;
+  }
+  .hero-photo {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid rgba(255,255,255,0.2);
+    margin-bottom: 16px;
+  }
+  .hero h1 {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+  .hero .subtitle {
+    font-size: 16px;
+    color: #94a3b8;
+    margin: 4px 0 12px;
+  }
+  .hero .contact-links {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    font-size: 14px;
+    flex-wrap: wrap;
+  }
+  .hero .contact-links a {
+    color: #94a3b8;
+    transition: color 0.2s;
+  }
+  .hero .contact-links a:hover {
+    color: #fff;
+    text-decoration: none;
+  }
+
+  /* Sections */
+  section { padding: 50px 0; }
+  section:nth-child(even) { background: #fff; }
+  .section-title {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 28px;
+    text-align: center;
+    position: relative;
+  }
+  .section-title::after {
+    content: '';
+    display: block;
+    width: 50px;
+    height: 3px;
+    background: #2563eb;
+    margin: 8px auto 0;
+    border-radius: 2px;
+  }
+
+  /* About */
+  .about-text {
+    max-width: 700px;
+    margin: 0 auto;
+    text-align: center;
+    color: #475569;
+    font-size: 15px;
+  }
+
+  /* Projects */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 24px;
+  }
+  .project-card {
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    border: 1px solid #e2e8f0;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .project-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+  }
+  .project-thumb {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+    background: #f1f5f9;
+  }
+  .project-info {
+    padding: 16px 18px 18px;
+  }
+  .project-info h3 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin: 6px 0 8px;
+  }
+  .tag {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 10px;
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+  }
+  .tag-live { background: #dcfce7; color: #166534; }
+  .tag-design { background: #f3e8ff; color: #6b21a8; }
+  .project-info p {
+    font-size: 13px;
+    color: #64748b;
+  }
+  .project-gallery {
+    display: flex;
+    gap: 6px;
+    margin-top: 10px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+  }
+  .project-gallery img {
+    width: 80px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 6px;
+    cursor: pointer;
+    border: 1px solid #e2e8f0;
+    transition: opacity 0.2s;
+    flex-shrink: 0;
+  }
+  .project-gallery img:hover { opacity: 0.8; }
+  .project-gallery img.active {
+    border: 2px solid #2563eb;
+  }
+
+  /* Skills */
+  .skills-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  .skill-badge {
+    background: #f1f5f9;
+    border: 1px solid #e2e8f0;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #334155;
+  }
+
+  /* Contact */
+  .contact-section {
+    text-align: center;
+  }
+  .contact-links-list {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+    margin-top: 8px;
+    font-size: 15px;
+  }
+  .contact-links-list a {
+    color: #2563eb;
+  }
+
+  /* Footer */
+  footer {
+    text-align: center;
+    padding: 24px 0;
+    color: #94a3b8;
+    font-size: 13px;
+    border-top: 1px solid #e2e8f0;
+  }
+
+  /* Lightbox */
+  .lightbox {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.85);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+  .lightbox img {
+    max-width: 90vw;
+    max-height: 90vh;
+    border-radius: 8px;
+    box-shadow: 0 4px 30px rgba(0,0,0,0.5);
+  }
+  .lightbox.show { display: flex; }
+
+  @media (max-width: 700px) {
+    .hero { padding: 40px 0 30px; }
+    .hero h1 { font-size: 22px; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .project-gallery img { width: 64px; height: 40px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Hero -->
+<header class="hero">
+  <div class="container">
+    <img src="photo.png" alt="John Paul N. Jeruta" class="hero-photo">
+    <h1>John Paul N. Jeruta</h1>
+    <div class="subtitle">Full Stack Developer</div>
+    <div class="contact-links">
+      <span>&#9993; jerutajp28@gmail.com</span>
+      <span>&#9742; 0963 765 9972</span>
+      <a href="https://github.com/immortalperson22" target="_blank">GitHub</a>
+      <a href="https://v0-sagility.vercel.app" target="_blank">Live: Sagility HR</a>
+    </div>
+  </div>
+</header>
+
+<!-- About -->
+<section>
+  <div class="container">
+    <h2 class="section-title">About</h2>
+    <div class="about-text">
+      Full Stack Developer with hands-on experience building and deploying real-world applications.
+      I build functional, user-focused software — from后端 API design to responsive frontends.
+      My projects are live and used by real clients.
+    </div>
+  </div>
+</section>
+
+<!-- Projects -->
+<section style="background:#fff">
+  <div class="container">
+    <h2 class="section-title">Projects</h2>
+    <div class="projects-grid">
+
+      <!-- Sagility HR Hub -->
+      <div class="project-card" data-gallery="sagility">
+        <img class="project-thumb" src="Screenshot 2026-06-06 at 21-31-18 Sagility.png" alt="Sagility HR Hub">
+        <div class="project-info">
+          <h3>Sagility HR Hub</h3>
+          <div class="project-tags">
+            <span class="tag tag-live">LIVE</span>
+          </div>
+          <p>Employee management platform with Supabase authentication, MFA, RLS, and RBAC. Live at v0-sagility.vercel.app.</p>
+          <div class="project-gallery">
+            <img src="Screenshot 2026-06-06 at 21-31-18 Sagility.png" class="active" onclick="showLightbox(this.src)">
+            <img src="Screenshot 2026-06-06 at 21-33-40 Sagility.png" onclick="showLightbox(this.src)">
+            <img src="Screenshot 2026-06-06 at 21-38-17 Sagility.png" onclick="showLightbox(this.src)">
+          </div>
+        </div>
+      </div>
+
+      <!-- Testing Room Seating -->
+      <div class="project-card" data-gallery="testing">
+        <img class="project-thumb" src="Screenshot 2026-06-06 at 21-28-25 Testing Room Seating.png" alt="Testing Room Seating System">
+        <div class="project-info">
+          <h3>Testing Room Seating System</h3>
+          <div class="project-tags">
+            <span class="tag tag-live">LIVE</span>
+          </div>
+          <p>Seat assignment and display system deployed across 5 locations. Built with JavaScript, Firebase, and Voice RSS.</p>
+          <div class="project-gallery">
+            <img src="Screenshot 2026-06-06 at 21-28-25 Testing Room Seating.png" class="active" onclick="showLightbox(this.src)">
+            <img src="Screenshot 2026-06-06 at 21-28-39 Bohol — Admin.png" onclick="showLightbox(this.src)">
+            <img src="Screenshot 2026-06-06 at 21-29-28 Bohol — Display.png" onclick="showLightbox(this.src)">
+            <img src="Screenshot 2026-06-06 at 21-29-59 Bohol — Display.png" onclick="showLightbox(this.src)">
+          </div>
+        </div>
+      </div>
+
+      <!-- Planterday -->
+      <div class="project-card" data-gallery="planterday">
+        <img class="project-thumb" src="Screenshot 2026-06-06 at 21-26-39 Planterday - Discover the Perfect Plants.png" alt="Planterday">
+        <div class="project-info">
+          <h3>Planterday</h3>
+          <div class="project-tags">
+            <span class="tag tag-design">UI/UX DESIGN</span>
+          </div>
+          <p>UI/UX design concept — plant discovery and care app interface.</p>
+        </div>
+      </div>
+
+      <!-- Fantasy Core Planet Play -->
+      <div class="project-card" data-gallery="fantasy">
+        <img class="project-thumb" src="Screenshot 2026-06-06 at 21-27-21 Fantasy Core Planet Play.png" alt="Fantasy Core Planet Play">
+        <div class="project-info">
+          <h3>Fantasy Core Planet Play</h3>
+          <div class="project-tags">
+            <span class="tag tag-design">UI/UX DESIGN</span>
+          </div>
+          <p>UI/UX design concept — interactive fantasy-themed planet exploration app.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Skills -->
+<section>
+  <div class="container">
+    <h2 class="section-title">Skills</h2>
+    <div class="skills-list">
+      <span class="skill-badge">React</span>
+      <span class="skill-badge">Next.js</span>
+      <span class="skill-badge">JavaScript</span>
+      <span class="skill-badge">HTML5 / CSS3</span>
+      <span class="skill-badge">Supabase</span>
+      <span class="skill-badge">Firebase</span>
+      <span class="skill-badge">MariaDB / SQL</span>
+      <span class="skill-badge">Node.js</span>
+      <span class="skill-badge">Git / GitHub</span>
+      <span class="skill-badge">REST APIs</span>
+      <span class="skill-badge">RBAC / RLS</span>
+      <span class="skill-badge">UI / UX Design</span>
+    </div>
+  </div>
+</section>
+
+<!-- Contact -->
+<section style="background:#fff">
+  <div class="container contact-section">
+    <h2 class="section-title">Contact</h2>
+    <p style="color:#475569; font-size:15px;">Let's build something together.</p>
+    <div class="contact-links-list">
+      <a href="mailto:jerutajp28@gmail.com">&#9993; jerutajp28@gmail.com</a>
+      <span>&#9742; 0963 765 9972</span>
+      <a href="https://github.com/immortalperson22" target="_blank">GitHub</a>
+      <a href="https://v0-sagility.vercel.app" target="_blank">v0-sagility.vercel.app</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    &copy; 2026 John Paul N. Jeruta
+  </div>
+</footer>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" onclick="this.classList.remove('show')">
+  <img id="lightbox-img" src="" alt="Preview">
+</div>
+
+<script>
+function showLightbox(src) {
+  document.getElementById('lightbox-img').src = src;
+  document.getElementById('lightbox').classList.add('show');
+}
+</script>
+</body>
+</html>
