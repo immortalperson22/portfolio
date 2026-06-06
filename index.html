@@ -216,15 +216,75 @@
     z-index: 1000;
     justify-content: center;
     align-items: center;
-    cursor: pointer;
   }
-  .lightbox img {
+  .lightbox.show { display: flex; }
+  .lightbox-bg {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    z-index: 0;
+  }
+  .lightbox-img-wrap {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .lightbox-img-wrap img {
     max-width: 90vw;
     max-height: 90vh;
     border-radius: 8px;
     box-shadow: 0 4px 30px rgba(0,0,0,0.5);
+    display: block;
+    pointer-events: none;
   }
-  .lightbox.show { display: flex; }
+  .lightbox-close {
+    position: absolute;
+    top: 16px;
+    right: 24px;
+    z-index: 2;
+    color: #fff;
+    font-size: 32px;
+    cursor: pointer;
+    line-height: 1;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+    user-select: none;
+  }
+  .lightbox-close:hover { opacity: 1; }
+  .lightbox-prev,
+  .lightbox-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+    color: #fff;
+    font-size: 48px;
+    cursor: pointer;
+    padding: 12px 16px;
+    opacity: 0.5;
+    transition: opacity 0.2s;
+    user-select: none;
+    line-height: 1;
+  }
+  .lightbox-prev { left: 8px; }
+  .lightbox-next { right: 8px; }
+  .lightbox-prev:hover,
+  .lightbox-next:hover { opacity: 1; }
+  .lightbox-counter {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    color: #94a3b8;
+    font-size: 14px;
+    background: rgba(0,0,0,0.5);
+    padding: 4px 14px;
+    border-radius: 20px;
+    user-select: none;
+  }
+  .noscroll { overflow: hidden; }
 
   @media (max-width: 700px) {
     .hero { padding: 40px 0 30px; }
@@ -271,7 +331,7 @@
 
       <!-- Sagility HR Hub -->
       <div class="project-card" data-gallery="sagility">
-        <img class="project-thumb" src="Screenshot 2026-06-06 at 21-31-18 Sagility.png" alt="Sagility HR Hub" onclick="showLightbox(this.src)" style="cursor:pointer">
+        <img class="project-thumb" src="Screenshot 2026-06-06 at 21-31-18 Sagility.png" alt="Sagility HR Hub" onclick="showLightbox(this)" style="cursor:pointer">
         <div class="project-info">
           <h3>Sagility HR Hub</h3>
           <div class="project-tags">
@@ -279,16 +339,16 @@
           </div>
           <p>Employee management platform with Supabase authentication, MFA, RLS, and RBAC. Live at v0-sagility.vercel.app.</p>
           <div class="project-gallery">
-            <img src="Screenshot 2026-06-06 at 21-31-18 Sagility.png" class="active" onclick="showLightbox(this.src)">
-            <img src="Screenshot 2026-06-06 at 21-33-40 Sagility.png" onclick="showLightbox(this.src)">
-            <img src="Screenshot 2026-06-06 at 21-38-17 Sagility.png" onclick="showLightbox(this.src)">
+            <img src="Screenshot 2026-06-06 at 21-31-18 Sagility.png" class="active" onclick="showLightbox(this)">
+            <img src="Screenshot 2026-06-06 at 21-33-40 Sagility.png" onclick="showLightbox(this)">
+            <img src="Screenshot 2026-06-06 at 21-38-17 Sagility.png" onclick="showLightbox(this)">
           </div>
         </div>
       </div>
 
       <!-- Testing Room Seating -->
       <div class="project-card" data-gallery="testing">
-        <img class="project-thumb" src="Screenshot 2026-06-06 at 21-28-25 Testing Room Seating.png" alt="Testing Room Seating System" onclick="showLightbox(this.src)" style="cursor:pointer">
+        <img class="project-thumb" src="Screenshot 2026-06-06 at 21-28-25 Testing Room Seating.png" alt="Testing Room Seating System" onclick="showLightbox(this)" style="cursor:pointer">
         <div class="project-info">
           <h3>Testing Room Seating System</h3>
           <div class="project-tags">
@@ -296,17 +356,17 @@
           </div>
           <p>Seat assignment and display system deployed across 5 locations. Built with JavaScript, Firebase, and Voice RSS.</p>
           <div class="project-gallery">
-            <img src="Screenshot 2026-06-06 at 21-28-25 Testing Room Seating.png" class="active" onclick="showLightbox(this.src)">
-            <img src="Screenshot 2026-06-06 at 21-28-39 Bohol — Admin.png" onclick="showLightbox(this.src)">
-            <img src="Screenshot 2026-06-06 at 21-29-28 Bohol — Display.png" onclick="showLightbox(this.src)">
-            <img src="Screenshot 2026-06-06 at 21-29-59 Bohol — Display.png" onclick="showLightbox(this.src)">
+            <img src="Screenshot 2026-06-06 at 21-28-25 Testing Room Seating.png" class="active" onclick="showLightbox(this)">
+            <img src="Screenshot 2026-06-06 at 21-28-39 Bohol — Admin.png" onclick="showLightbox(this)">
+            <img src="Screenshot 2026-06-06 at 21-29-28 Bohol — Display.png" onclick="showLightbox(this)">
+            <img src="Screenshot 2026-06-06 at 21-29-59 Bohol — Display.png" onclick="showLightbox(this)">
           </div>
         </div>
       </div>
 
       <!-- Planterday -->
       <div class="project-card" data-gallery="planterday">
-        <img class="project-thumb" src="Screenshot 2026-06-06 at 21-26-39 Planterday - Discover the Perfect Plants.png" alt="Planterday" onclick="showLightbox(this.src)" style="cursor:pointer">
+        <img class="project-thumb" src="Screenshot 2026-06-06 at 21-26-39 Planterday - Discover the Perfect Plants.png" alt="Planterday" onclick="showLightbox(this)" style="cursor:pointer">
         <div class="project-info">
           <h3>Planterday</h3>
           <div class="project-tags">
@@ -318,7 +378,7 @@
 
       <!-- Fantasy Core Planet Play -->
       <div class="project-card" data-gallery="fantasy">
-        <img class="project-thumb" src="Screenshot 2026-06-06 at 21-27-21 Fantasy Core Planet Play.png" alt="Fantasy Core Planet Play" onclick="showLightbox(this.src)" style="cursor:pointer">
+        <img class="project-thumb" src="Screenshot 2026-06-06 at 21-27-21 Fantasy Core Planet Play.png" alt="Fantasy Core Planet Play" onclick="showLightbox(this)" style="cursor:pointer">
         <div class="project-info">
           <h3>Fantasy Core Planet Play</h3>
           <div class="project-tags">
@@ -374,15 +434,67 @@
 </footer>
 
 <!-- Lightbox -->
-<div class="lightbox" id="lightbox" onclick="this.classList.remove('show')">
-  <img id="lightbox-img" src="" alt="Preview">
+<div class="lightbox" id="lightbox">
+  <div class="lightbox-bg" onclick="closeLightbox()"></div>
+  <span class="lightbox-prev" onclick="prevImage(event)">&#8249;</span>
+  <div class="lightbox-img-wrap">
+    <img id="lightbox-img" src="" alt="Preview">
+  </div>
+  <span class="lightbox-next" onclick="nextImage(event)">&#8250;</span>
+  <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+  <span class="lightbox-counter" id="lightbox-counter"></span>
 </div>
 
 <script>
-function showLightbox(src) {
+var lightboxImages = [];
+var lightboxIndex = 0;
+
+function showLightbox(el) {
+  var card = el.closest('.project-card');
+  var imgs = card.querySelectorAll('img');
+  lightboxImages = [];
+  imgs.forEach(function(img) { lightboxImages.push(img.src); });
+  var src = el.src || el.getAttribute('src');
+  lightboxIndex = lightboxImages.indexOf(src);
+  if (lightboxIndex === -1) lightboxIndex = 0;
   document.getElementById('lightbox-img').src = src;
+  updateCounter();
   document.getElementById('lightbox').classList.add('show');
+  document.body.classList.add('noscroll');
 }
+
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('show');
+  document.body.classList.remove('noscroll');
+}
+
+function prevImage(e) {
+  if (e) e.stopPropagation();
+  if (lightboxImages.length === 0) return;
+  lightboxIndex = (lightboxIndex - 1 + lightboxImages.length) % lightboxImages.length;
+  document.getElementById('lightbox-img').src = lightboxImages[lightboxIndex];
+  updateCounter();
+}
+
+function nextImage(e) {
+  if (e) e.stopPropagation();
+  if (lightboxImages.length === 0) return;
+  lightboxIndex = (lightboxIndex + 1) % lightboxImages.length;
+  document.getElementById('lightbox-img').src = lightboxImages[lightboxIndex];
+  updateCounter();
+}
+
+function updateCounter() {
+  document.getElementById('lightbox-counter').textContent =
+    (lightboxIndex + 1) + ' / ' + lightboxImages.length;
+}
+
+document.addEventListener('keydown', function(e) {
+  if (!document.getElementById('lightbox').classList.contains('show')) return;
+  if (e.key === 'Escape') closeLightbox();
+  if (e.key === 'ArrowLeft') prevImage();
+  if (e.key === 'ArrowRight') nextImage();
+});
 </script>
 </body>
 </html>
